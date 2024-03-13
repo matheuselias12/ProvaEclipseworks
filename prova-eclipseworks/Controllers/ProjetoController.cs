@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using prova_eclipseworks.Domain.Models;
+using prova_eclipseworks.Service;
 using prova_eclipseworks.Service.Interface;
 
 namespace prova_eclipseworks.Controllers
@@ -34,6 +35,19 @@ namespace prova_eclipseworks.Controllers
             try
             {
                 await _projetoService.AdiconarNovoProjeto(projeto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpDelete]
+        public async Task<ActionResult<Projeto>> DeletarProjeto(int projetoId)
+        {
+            try
+            {
+                await _projetoService.DeletarProjeto(projetoId);
                 return Ok();
             }
             catch (Exception ex)

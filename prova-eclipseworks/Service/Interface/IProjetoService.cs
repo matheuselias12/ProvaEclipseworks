@@ -6,5 +6,6 @@ namespace prova_eclipseworks.Service.Interface
     {
         Task<List<Projeto>> GetProjetoPorUsuarioId(int usuarioId);
         Task AdiconarNovoProjeto(Projeto projeto);
+        Task DeletarProjeto(int projetoId);
     }
 }

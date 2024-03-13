@@ -21,5 +21,9 @@ namespace prova_eclipseworks.Service
         {
             return await _projetoRepository.GetProjetoPorUsuarioId(usuarioId);
         }
+        public async Task DeletarProjeto(int projetoId)
+        {
+            await _projetoRepository.DeletarProjeto(projetoId);
+        }
     }
 }
