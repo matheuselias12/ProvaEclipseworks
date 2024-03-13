@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using prova_eclipseworks.Domain.Dto;
 using prova_eclipseworks.Domain.Models;
 using prova_eclipseworks.Service;
 using prova_eclipseworks.Service.Interface;
@@ -15,20 +17,8 @@ namespace prova_eclipseworks.Controllers
             _tarefaService = tarefaService;
         }
 
-        [HttpGet("{projetoId}")]
-        public async Task<ActionResult<Projeto>> GetProjetoPorUsuarioId(int projetoId)
-        {
-            try
-            {
-                return Ok(await _tarefaService.GetTarefaPorProjetoId(projetoId));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
         [HttpPost]
-        public async Task<ActionResult<Tarefa>> AdiconarNovaTarefa([FromBody] Tarefa tarefa)
+        public async Task<ActionResult<Tarefa>> AdiconarNovaTarefa([FromBody] List<Tarefa> tarefa)
         {
             try
             {
@@ -40,8 +30,20 @@ namespace prova_eclipseworks.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpPut]
-        public async Task<ActionResult<Tarefa>> EditarNovaTarefa([FromBody] Tarefa tarefa)
+        [HttpGet("{projetoId}")]
+        public async Task<ActionResult<Tarefa>> GetProjetoPorUsuarioId(int projetoId)
+        {
+            try
+            {
+                return Ok(await _tarefaService.GetTarefaPorProjetoId(projetoId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPut("EditarTarefa")]
+        public async Task<ActionResult<TarefaDto>> EditarTarefa([FromBody] TarefaDto tarefa)
         {
             try
             {
@@ -60,6 +62,19 @@ namespace prova_eclipseworks.Controllers
             {
                 await _tarefaService.DeletarNovaTarefa(tarefaId);
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPatch]
+        [Authorize(Roles = "GerenteProjeto")]
+        public async Task<ActionResult<RelatorioTarefas>> ObterRelatorioDesempenho([FromBody] List<Usuario> usuarios)
+        {
+            try
+            {
+                return Ok(await _tarefaService.ObterRelatorioDesempenho(usuarios));
             }
             catch (Exception ex)
             {

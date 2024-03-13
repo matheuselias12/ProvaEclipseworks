@@ -4,6 +4,12 @@
     {
         Pendente = 0, 
         EmAndamento = 1, 
-        Concluída = 2,
+        Concluida = 2,
+    }
+    public enum Prioridade
+    {
+        Baixa = 0,
+        Media = 1,
+        Alta = 2,
     }
 }
