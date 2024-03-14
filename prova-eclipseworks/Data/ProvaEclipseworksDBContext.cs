@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using prova_eclipseworks.Data.Mapping;
 using prova_eclipseworks.Domain.Models;
 
 namespace prova_eclipseworks.Data
@@ -10,9 +11,12 @@ namespace prova_eclipseworks.Data
         public DbSet<Projeto> Projetos { get; set; }
         public DbSet<HistoricoTarefa> HistoricoTarefas { get; set; }
 
-        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.ConfigureConventions(configurationBuilder);
+            modelBuilder.ApplyConfiguration(new TrojetoMap());
+            modelBuilder.ApplyConfiguration(new UsuarioMap());
+            modelBuilder.ApplyConfiguration(new TarefaMap());
+            modelBuilder.ApplyConfiguration(new HistoricoTarefaMap());
         }
     }
 }

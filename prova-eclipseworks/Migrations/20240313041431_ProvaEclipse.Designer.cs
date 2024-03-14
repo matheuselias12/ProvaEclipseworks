@@ -12,7 +12,7 @@ using prova_eclipseworks.Data;
 namespace prova_eclipseworks.Migrations
 {
     [DbContext(typeof(ProvaEclipseworksDBContext))]
-    [Migration("20240311192211_ProvaEclipse")]
+    [Migration("20240313041431_ProvaEclipse")]
     partial class ProvaEclipse
     {
         /// <inheritdoc />
@@ -34,20 +34,22 @@ namespace prova_eclipseworks.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TarefaHistoricoId"));
 
                     b.Property<string>("Comentario")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(500)");
 
                     b.Property<DateTime>("DataModificacao")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("InfoModidicada")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(800)");
 
                     b.Property<int>("TarefaId")
                         .HasColumnType("int");
 
                     b.HasKey("TarefaHistoricoId");
 
-                    b.ToTable("HistoricoTarefas");
+                    b.HasIndex("TarefaId");
+
+                    b.ToTable("HistoricoTarefa", (string)null);
                 });
 
             modelBuilder.Entity("prova_eclipseworks.Domain.Models.Projeto", b =>
@@ -59,18 +61,19 @@ namespace prova_eclipseworks.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProjetoId"));
 
                     b.Property<string>("NomeProjeto")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(500)");
 
-                    b.Property<bool>("StatusProjeto")
-                        .HasColumnType("bit");
+                    b.Property<int>("StatusProjeto")
+                        .HasColumnType("int");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("ProjetoId");
 
-                    b.ToTable("Projetos");
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Projeto", (string)null);
                 });
 
             modelBuilder.Entity("prova_eclipseworks.Domain.Models.Tarefa", b =>
@@ -82,12 +85,12 @@ namespace prova_eclipseworks.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TarefaId"));
 
                     b.Property<DateTime>("DataVencimento")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(500)");
 
-                    b.Property<int?>("Prioridades")
+                    b.Property<int>("Prioridades")
                         .HasColumnType("int");
 
                     b.Property<int>("ProjetoId")
@@ -97,14 +100,18 @@ namespace prova_eclipseworks.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Titulo")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("TarefaId");
 
-                    b.ToTable("Tarefas");
+                    b.HasIndex("ProjetoId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Tarefa", (string)null);
                 });
 
             modelBuilder.Entity("prova_eclipseworks.Domain.Models.Usuario", b =>
@@ -116,21 +123,61 @@ namespace prova_eclipseworks.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UsuarioId"));
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Endereco")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Telefone")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("UsuarioId");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuario", (string)null);
+                });
+
+            modelBuilder.Entity("prova_eclipseworks.Domain.Models.HistoricoTarefa", b =>
+                {
+                    b.HasOne("prova_eclipseworks.Domain.Models.Tarefa", "Tarefa")
+                        .WithMany()
+                        .HasForeignKey("TarefaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tarefa");
+                });
+
+            modelBuilder.Entity("prova_eclipseworks.Domain.Models.Projeto", b =>
+                {
+                    b.HasOne("prova_eclipseworks.Domain.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("prova_eclipseworks.Domain.Models.Tarefa", b =>
+                {
+                    b.HasOne("prova_eclipseworks.Domain.Models.Projeto", "Projeto")
+                        .WithMany()
+                        .HasForeignKey("ProjetoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("prova_eclipseworks.Domain.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Projeto");
+
+                    b.Navigation("Usuario");
                 });
 #pragma warning restore 612, 618
         }

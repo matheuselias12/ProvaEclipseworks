@@ -41,11 +41,11 @@ namespace prova_eclipseworks.Service
                 var listTarefa = await _tarefaRepository.ObterRelatorioDesempenho(item.UsuarioId);
                 var quatidadeConcluida = listTarefa.Where(x => x.StatusTarefa == StatusTarefa.Concluida).Count();
                 var totalAtividades = listTarefa.Count();
-                decimal percentual = (Convert.ToDecimal(quatidadeConcluida) / Convert.ToDecimal(totalAtividades));
+                decimal percentual = (Convert.ToDecimal(quatidadeConcluida) / Convert.ToDecimal(totalAtividades)) * 100;
                 var obj = new RelatorioTarefas()
                 {
                     UsuarioId = item.UsuarioId,
-                    Percentual = percentual * 100
+                    Percentual = percentual
                 };
                 listRelatorioTarefas.Add(obj);
             }

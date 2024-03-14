@@ -6,7 +6,9 @@ namespace prova_eclipseworks.Domain.Models
     {
         public int ProjetoId { get; set; }
         public int UsuarioId { get; set; }
-        public required string NomeProjeto { get; set; }
+        public string? NomeProjeto { get; set; }
         public bool StatusProjeto { get; set; }
+
+        public Usuario Usuario { get; set; }
     }
 }

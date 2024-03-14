@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using prova_eclipseworks.Domain.Models;
-using prova_eclipseworks.Service;
 using prova_eclipseworks.Service.Interface;
 
 namespace prova_eclipseworks.Controllers
@@ -17,7 +15,7 @@ namespace prova_eclipseworks.Controllers
         }
 
         [HttpGet("{usuarioId}")]
-        public async Task<ActionResult<Projeto>> GetProjetoPorUsuarioId(int usuarioId)
+        public async Task<ActionResult<List<Projeto>>> GetProjetoPorUsuarioId(int usuarioId)
         {
             try
             {

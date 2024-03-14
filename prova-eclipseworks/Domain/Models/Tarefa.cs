@@ -12,5 +12,8 @@ namespace prova_eclipseworks.Domain.Models
         public DateTime DataVencimento { get; set; }
         public StatusTarefa StatusTarefa { get; set; }
         public Prioridade Prioridades { get; set; }
+
+        public Projeto Projeto { get; set; }
+        public Usuario Usuario { get; set; }
     }
 }

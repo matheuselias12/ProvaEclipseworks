@@ -36,6 +36,7 @@ namespace prova_eclipseworks.Repository
                 await _dBContext.Tarefas.AddAsync(item);
                 await _dBContext.SaveChangesAsync();
             }
+            return;
         }
         public async Task EditarNovaTarefa(TarefaDto tarefa)
         {
