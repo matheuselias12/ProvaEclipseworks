@@ -16,7 +16,7 @@ namespace prova_eclipseworks.Service
         {
             _tarefaRepository = tarefaRepository;
         }
-        public async Task AdiconarNovaTarefa(List<Tarefa> tarefa)
+        public async Task AdiconarNovaTarefa(List<TarefaDto> tarefa)
         {
             await _tarefaRepository.AdiconarNovaTarefa(tarefa);
         }
@@ -28,7 +28,7 @@ namespace prova_eclipseworks.Service
         {
             await _tarefaRepository.EditarNovaTarefa(tarefa);
         }
-        public async Task<List<Tarefa>> GetTarefaPorProjetoId(int projetoId)
+        public async Task<List<TarefaDto>> GetTarefaPorProjetoId(int projetoId)
         {
             return await _tarefaRepository.GetTarefaPorProjetoId(projetoId);
         }

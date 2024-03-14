@@ -1,6 +1,7 @@
 using AutoFixture;
 using Moq;
 using prova_eclipseworks.Controllers;
+using prova_eclipseworks.Domain.Dto;
 using prova_eclipseworks.Domain.Models;
 using prova_eclipseworks.Repository.Interface;
 using prova_eclipseworks.Service;
@@ -13,15 +14,15 @@ namespace TesteUnitarioEclipseworks
         public async void BuscarProjetoPorUsuarioId_RetornaListaComUmItem()
         {
             //Arrenge
-            var listProjeto = new List<Projeto>();
-            var projeto1 = new Projeto()
+            var listProjeto = new List<ProjetoDto>();
+            var projeto1 = new ProjetoDto()
             {
                 ProjetoId = 1,
                 UsuarioId = 1,
                 NomeProjeto = "Teste 1",
                 StatusProjeto = true
             };
-            var projeto2 = new Projeto()
+            var projeto2 = new ProjetoDto()
             {
                 ProjetoId = 1,
                 UsuarioId = 2,
@@ -48,15 +49,15 @@ namespace TesteUnitarioEclipseworks
         public async void BuscarProjetoPorUsuarioId_RetornaListaComTresItems()
         {
             //Arrenge
-            var listUsuario = new List<Projeto>();
-            var usuario1 = new Projeto()
+            var listUsuario = new List<ProjetoDto>();
+            var usuario1 = new ProjetoDto()
             {
                 ProjetoId = 1,
                 UsuarioId = 1,
                 NomeProjeto = "Teste 1",
                 StatusProjeto = true
             };
-            var usuario2 = new Projeto()
+            var usuario2 = new ProjetoDto()
             {
                 ProjetoId = 1,
                 UsuarioId = 2,
@@ -84,14 +85,14 @@ namespace TesteUnitarioEclipseworks
         public void CriaNovoProjeto_RetornaSeFoiAdiconado()
         {
             //Arrenge
-            var usuario = new Fixture().Create<Projeto>();
+            var projeto = new Fixture().Create<ProjetoDto>();
             var mockListProjetos = new Mock<IProjetoRepository>();
 
-            mockListProjetos.Setup(x => x.AdiconarNovoProjeto(usuario));
+            mockListProjetos.Setup(x => x.AdiconarNovoProjeto(projeto));
 
             //Act
             ProjetoService projetoService = new(mockListProjetos.Object);
-            var result = projetoService.AdiconarNovoProjeto(usuario).IsCompletedSuccessfully;
+            var result = projetoService.AdiconarNovoProjeto(projeto).IsCompletedSuccessfully;
 
             //Assert
             Assert.True(result);

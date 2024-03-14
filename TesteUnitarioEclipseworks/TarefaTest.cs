@@ -17,7 +17,7 @@ namespace TesteUnitarioEclipseworks
         public void CriaNovoTarefa_AdiconaNoBanco()
         {
             //Arrenge
-            var tarefaList = new Fixture().Create<List<Tarefa>>().Take(2).ToList();
+            var tarefaList = new Fixture().Create<List<TarefaDto>>().Take(2).ToList();
             var mockTarefa= new Mock<ITarefaRepository>();
             mockTarefa.Setup(x => x.AdiconarNovaTarefa(tarefaList)).ToString();
 
@@ -66,10 +66,10 @@ namespace TesteUnitarioEclipseworks
         public async void BuscarTarefaPorProjetoId_RetornaListaComUmItem()
         {
             //Arrenge
-            var tarefaList = new Fixture().Create<List<Tarefa>>().Take(2).ToList();
+            var tarefaList = new Fixture().Create<List<TarefaDto>>().Take(2).ToList();
             var mockListProjetos = new Mock<ITarefaRepository>();
             var projetoId = tarefaList.Select(x => x.ProjetoId).FirstOrDefault();
-            mockListProjetos.Setup(x => x.GetTarefaPorProjetoId(projetoId)).ReturnsAsync(tarefaList);
+            mockListProjetos.Setup(x => x.GetTarefaPorProjetoId(projetoId).Result).Returns(tarefaList);
             //Act
             TarefaService projetoService = new(mockListProjetos.Object);
             var listProjetos = await projetoService.GetTarefaPorProjetoId(projetoId);

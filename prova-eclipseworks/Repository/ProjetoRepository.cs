@@ -1,5 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.WebEncoders.Testing;
 using prova_eclipseworks.Data;
+using prova_eclipseworks.Domain.Dto;
 using prova_eclipseworks.Domain.Enums;
 using prova_eclipseworks.Domain.Models;
 using prova_eclipseworks.Repository.Interface;
@@ -10,21 +14,25 @@ namespace prova_eclipseworks.Repository
     public class ProjetoRepository : IProjetoRepository
     {
         private readonly ProvaEclipseworksDBContext _dBContext;
+        private readonly IMapper _mapper;
 
-        public ProjetoRepository(ProvaEclipseworksDBContext dBContext)
+        public ProjetoRepository(ProvaEclipseworksDBContext dBContext, IMapper mapper)
         {
             _dBContext = dBContext;
+            _mapper = mapper;
         }
 
-        public async Task AdiconarNovoProjeto(Projeto projeto)
+        public async Task AdiconarNovoProjeto(ProjetoDto projetoDto)
         {
+            var projeto = _mapper.Map<Projeto>(projetoDto);
             await _dBContext.Projetos.AddAsync(projeto);
-            await _dBContext.SaveChangesAsync();
+            _dBContext.SaveChanges();
         }
 
-        public async Task<List<Projeto>> GetProjetoPorUsuarioId(int usuarioId)
+        public async Task<List<ProjetoDto>> GetProjetoPorUsuarioId(int usuarioId)
         {
-            return await _dBContext.Projetos.Where(x => x.UsuarioId == usuarioId).ToListAsync();
+            var projetos = await _dBContext.Projetos.Where(x => x.UsuarioId == usuarioId).ToListAsync();
+            return _mapper.Map<List<ProjetoDto>>(projetos);
         }
         public async Task DeletarProjeto(int projetoId)
         {

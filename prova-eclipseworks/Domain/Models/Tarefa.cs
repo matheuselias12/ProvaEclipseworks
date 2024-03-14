@@ -1,9 +1,13 @@
 ﻿using prova_eclipseworks.Domain.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace prova_eclipseworks.Domain.Models
 {
     public class Tarefa
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TarefaId { get; set; }
         public int ProjetoId { get; set; }
         public int UsuarioId { get; set; }
