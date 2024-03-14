@@ -9,10 +9,10 @@ namespace prova_eclipseworks.Domain.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProjetoId { get; set; }
-        public int UsuarioId { get; set; }
+        public int? UsuarioId { get; set; }
         public string? NomeProjeto { get; set; }
         public bool StatusProjeto { get; set; }
 
-        public Usuario? Usuario { get; set; }
+        //public Usuario? Usuario { get; set; }
     }
 }

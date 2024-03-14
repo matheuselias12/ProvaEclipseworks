@@ -9,6 +9,6 @@ namespace prova_eclipseworks.Service.Interface
         Task AdiconarNovaTarefa(List<TarefaDto> tarefa);
         Task EditarNovaTarefa(TarefaDto tarefa);
         Task DeletarNovaTarefa(int tarefaId);
-        Task<List<RelatorioTarefas>> ObterRelatorioDesempenho(List<Usuario> usuarios);
+        Task<List<RelatorioTarefas>> ObterRelatorioDesempenho(List<UsuarioDto> usuarios);
     }
 }

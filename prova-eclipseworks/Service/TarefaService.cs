@@ -32,19 +32,19 @@ namespace prova_eclipseworks.Service
         {
             return await _tarefaRepository.GetTarefaPorProjetoId(projetoId);
         }
-        public async Task<List<RelatorioTarefas>> ObterRelatorioDesempenho(List<Usuario> usuarios)
+        public async Task<List<RelatorioTarefas>> ObterRelatorioDesempenho(List<UsuarioDto> usuarios)
         {
             var listRelatorioTarefas = new List<RelatorioTarefas>();
 
             foreach (var item in usuarios)
             {
-                var listTarefa = await _tarefaRepository.ObterRelatorioDesempenho(item.UsuarioId);
+                var listTarefa = await _tarefaRepository.ObterRelatorioDesempenho(item.UsuarioId.Value);
                 var quatidadeConcluida = listTarefa.Where(x => x.StatusTarefa == StatusTarefa.Concluida).Count();
                 var totalAtividades = listTarefa.Count();
                 decimal percentual = (Convert.ToDecimal(quatidadeConcluida) / Convert.ToDecimal(totalAtividades)) * 100;
                 var obj = new RelatorioTarefas()
                 {
-                    UsuarioId = item.UsuarioId,
+                    UsuarioId = item.UsuarioId.Value,
                     Percentual = percentual
                 };
                 listRelatorioTarefas.Add(obj);
