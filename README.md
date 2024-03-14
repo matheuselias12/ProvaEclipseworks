@@ -35,7 +35,7 @@ Após baixar o projeto, você pode abrir o visual studio (community enterprise o
 
 - Para executar o projeto colocar no docker-compose e de o play no projeto.
 
-![image](https://github.com/matheuselias12/ProvaEclipseworks/assets/47905883/a434c2b5-1bb2-42cb-bb65-312060f3bb87)
+![image](https://github.com/matheuselias12/ProvaEclipseworks/assets/47905883/32201a25-ee21-48ae-b28e-af8839d99adf)
 
 ![image](https://github.com/matheuselias12/ProvaEclipseworks/assets/47905883/b7d117e7-a1ed-47a7-ae55-edb5cb35b4ec)
 
