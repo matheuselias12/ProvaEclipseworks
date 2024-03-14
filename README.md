@@ -17,5 +17,5 @@
 
   ## 📁 Acesso ao projeto
 
-Você pode [acessar o código fonte do projeto inicial]([https://github.com/alura-cursos/android-com-kotlin-personalizando-ui/tree/projeto-inicial](https://github.com/matheuselias12/ProvaEclipseworks.git)) ou [baixá-lo](https://github.com//matheuselias12/ProvaEclipseworks/archive/refs/heads/master.zip).
+Você pode [acessar o código fonte do projeto inicial](https://github.com/matheuselias12/ProvaEclipseworks.git) ou [baixá-lo](https://github.com//matheuselias12/ProvaEclipseworks/archive/refs/heads/master.zip).
 
