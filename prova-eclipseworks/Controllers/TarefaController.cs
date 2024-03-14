@@ -18,7 +18,7 @@ namespace prova_eclipseworks.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Tarefa>> AdiconarNovaTarefa([FromBody] List<Tarefa> tarefa)
+        public async Task<ActionResult<TarefaDto>> AdiconarNovaTarefa([FromBody] List<TarefaDto> tarefa)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace prova_eclipseworks.Controllers
             }
         }
         [HttpGet("{projetoId}")]
-        public async Task<ActionResult<Tarefa>> GetProjetoPorUsuarioId(int projetoId)
+        public async Task<ActionResult<TarefaDto>> GetProjetoPorUsuarioId(int projetoId)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace prova_eclipseworks.Controllers
             }
         }
         [HttpDelete]
-        public async Task<ActionResult<Tarefa>> DeletarNovaTarefa(int tarefaId)
+        public async Task<ActionResult<TarefaDto>> DeletarNovaTarefa(int tarefaId)
         {
             try
             {
@@ -70,6 +70,7 @@ namespace prova_eclipseworks.Controllers
         }
         [HttpPatch]
         [Authorize(Roles = "GerenteProjeto")]
+        [AllowAnonymous]
         public async Task<ActionResult<RelatorioTarefas>> ObterRelatorioDesempenho([FromBody] List<Usuario> usuarios)
         {
             try

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using prova_eclipseworks.Data;
 using prova_eclipseworks.Domain.Dto;
 using prova_eclipseworks.Domain.Enums;
@@ -11,31 +12,37 @@ namespace prova_eclipseworks.Repository
     public class TarefaRepository : ITarefaRepository
     {
         private readonly ProvaEclipseworksDBContext _dBContext;
+        private readonly IMapper _mapper;
 
-        public TarefaRepository(ProvaEclipseworksDBContext dBContext)
+        public TarefaRepository(ProvaEclipseworksDBContext dBContext, IMapper mapper)
         {
             _dBContext = dBContext;
+            _mapper = mapper;
         }
-        public async Task<List<Tarefa>> GetTarefaPorProjetoId(int projetoId)
+        public async Task<List<TarefaDto>> GetTarefaPorProjetoId(int projetoId)
         {
-            return await _dBContext.Tarefas.Where(x => x.ProjetoId == projetoId).ToListAsync();
+            return _mapper.Map<List<TarefaDto>>(await _dBContext.Tarefas.Where(x => x.ProjetoId == projetoId).ToListAsync());
         }
-        public async Task<List<Tarefa>> ObterRelatorioDesempenho(int usuarioId)
+        public async Task<List<TarefaDto>> ObterRelatorioDesempenho(int usuarioId)
         {
-            return await _dBContext.Tarefas.Where(x => x.DataVencimento >= DateTime.Today.AddDays(-30) && x.UsuarioId == usuarioId).ToListAsync();
+            return _mapper.Map<List<TarefaDto>>(await _dBContext.Tarefas.Where(x => x.DataVencimento >= DateTime.Today.AddDays(-30) && x.UsuarioId == usuarioId).ToListAsync());
         }
-        public async Task AdiconarNovaTarefa(List<Tarefa> tarefa)
+        public async Task AdiconarNovaTarefa(List<TarefaDto> tarefas)
         {
-            foreach (var item in tarefa)
+            var listTarefas = new List<TarefaDto>();
+            foreach (var item in tarefas)
             {
                 var obj = _dBContext.Tarefas.Where(x => x.ProjetoId == item.ProjetoId).ToList();
 
                 if (obj.Count() == 20) 
                     throw new Exception($"Esse projeto excedeu o numero de tarefas.");
 
-                await _dBContext.Tarefas.AddAsync(item);
-                await _dBContext.SaveChangesAsync();
+                listTarefas.Add(item);
             }
+            var tarefasMap = _mapper.Map<List<Tarefa>>(listTarefas);
+            await _dBContext.Tarefas.AddRangeAsync(tarefasMap);
+            _dBContext.SaveChanges();
+            return;
         }
         public async Task EditarNovaTarefa(TarefaDto tarefa)
         {

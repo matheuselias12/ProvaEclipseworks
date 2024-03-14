@@ -4,7 +4,7 @@ namespace prova_eclipseworks.Domain.Dto
 {
     public class TarefaDto
     {
-        public int TarefaId { get; set; }
+        public int? TarefaId { get; set; }
         public int ProjetoId { get; set; }
         public int UsuarioId { get; set; }
         public string? Titulo { get; set; }

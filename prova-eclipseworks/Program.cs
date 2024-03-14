@@ -1,6 +1,9 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using prova_eclipseworks.Data;
+using prova_eclipseworks.Domain.Dto;
+using prova_eclipseworks.Domain.Models;
 using prova_eclipseworks.Repository;
 using prova_eclipseworks.Repository.Interface;
 using prova_eclipseworks.Service;
@@ -22,6 +25,9 @@ builder.Services.AddScoped<ITarefaRepository, TarefaRepository>();
 builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
 builder.Services.AddScoped<ITarefaService, TarefaService>();
 builder.Services.AddScoped<IProjetoService, ProjetoService>();
+
+builder.Services.AddAutoMapper(typeof(ConfigurationMapping));
+
 
 builder.Services.AddAuthorization(options =>
 {
