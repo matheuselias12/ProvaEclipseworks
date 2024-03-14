@@ -31,7 +31,7 @@ Após baixar o projeto, você pode abrir o visual studio (community enterprise o
 
 - Apos fazer o clone do projeto em uma pasta favor executar a solução:
 
-![image](https://github.com/matheuselias12/ProvaEclipseworks/assets/47905883/27687947-ec35-49b5-84cf-6d6e477bf4c3)
+![image](https://github.com/matheuselias12/ProvaEclipseworks/assets/47905883/23f01da8-a8e2-4e55-8161-be475e2249dc)
 
 - Para executar o projeto colocar no docker-compose e de o play no projeto.
 
