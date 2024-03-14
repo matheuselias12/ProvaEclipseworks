@@ -12,40 +12,18 @@ namespace prova_eclipseworks.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Usuario",
-                columns: table => new
-                {
-                    UsuarioId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "varchar(100)", nullable: true),
-                    Email = table.Column<string>(type: "varchar(100)", nullable: true),
-                    Telefone = table.Column<string>(type: "varchar(20)", nullable: true),
-                    Endereco = table.Column<string>(type: "varchar(100)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Usuario", x => x.UsuarioId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Projeto",
                 columns: table => new
                 {
                     ProjetoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: true),
                     NomeProjeto = table.Column<string>(type: "varchar(500)", nullable: true),
                     StatusProjeto = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Projeto", x => x.ProjetoId);
-                    table.ForeignKey(
-                        name: "FK_Projeto_Usuario_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "Usuario",
-                        principalColumn: "UsuarioId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,7 +33,7 @@ namespace prova_eclipseworks.Migrations
                     TarefaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProjetoId = table.Column<int>(type: "int", nullable: false),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: true),
                     Titulo = table.Column<string>(type: "varchar(100)", nullable: true),
                     Descricao = table.Column<string>(type: "varchar(500)", nullable: true),
                     DataVencimento = table.Column<DateTime>(type: "datetime", nullable: false),
@@ -71,12 +49,6 @@ namespace prova_eclipseworks.Migrations
                         principalTable: "Projeto",
                         principalColumn: "ProjetoId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Tarefa_Usuario_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "Usuario",
-                        principalColumn: "UsuarioId",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -107,19 +79,9 @@ namespace prova_eclipseworks.Migrations
                 column: "TarefaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Projeto_UsuarioId",
-                table: "Projeto",
-                column: "UsuarioId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Tarefa_ProjetoId",
                 table: "Tarefa",
                 column: "ProjetoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tarefa_UsuarioId",
-                table: "Tarefa",
-                column: "UsuarioId");
         }
 
         /// <inheritdoc />
@@ -133,9 +95,6 @@ namespace prova_eclipseworks.Migrations
 
             migrationBuilder.DropTable(
                 name: "Projeto");
-
-            migrationBuilder.DropTable(
-                name: "Usuario");
         }
     }
 }

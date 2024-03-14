@@ -10,7 +10,7 @@ namespace prova_eclipseworks.Domain.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TarefaId { get; set; }
         public int ProjetoId { get; set; }
-        public int UsuarioId { get; set; }
+        public int? UsuarioId { get; set; }
         public string? Titulo { get; set; }
         public string? Descricao { get; set; }
         public DateTime DataVencimento { get; set; }
@@ -18,6 +18,6 @@ namespace prova_eclipseworks.Domain.Models
         public Prioridade Prioridades { get; set; }
 
         public Projeto Projeto { get; set; }
-        public Usuario Usuario { get; set; }
+        //public Usuario Usuario { get; set; }
     }
 }

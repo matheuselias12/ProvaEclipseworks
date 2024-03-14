@@ -71,7 +71,7 @@ namespace prova_eclipseworks.Controllers
         [HttpPatch]
         [Authorize(Roles = "GerenteProjeto")]
         [AllowAnonymous]
-        public async Task<ActionResult<RelatorioTarefas>> ObterRelatorioDesempenho([FromBody] List<Usuario> usuarios)
+        public async Task<ActionResult<RelatorioTarefas>> ObterRelatorioDesempenho([FromBody] List<UsuarioDto> usuarios)
         {
             try
             {

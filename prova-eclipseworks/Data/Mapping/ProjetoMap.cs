@@ -20,10 +20,6 @@ namespace prova_eclipseworks.Data.Mapping
 
             builder.Property(p => p.StatusProjeto)
                    .HasColumnType("int");
-
-            builder.HasOne(p => p.Usuario)
-                   .WithMany()
-                   .HasForeignKey(p => p.UsuarioId);
         }
     }
 }
