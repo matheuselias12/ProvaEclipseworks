@@ -24,11 +24,37 @@ Você pode [acessar o código fonte do projeto inicial](https://github.com/mathe
 Após baixar o projeto, você pode abrir o visual studio (community enterprise ou professional) e executar:
 
 - Ao abrir no visual studio devemos está com DockerFile aberto para as images e containers rodarem.
+  
 ![image](https://github.com/matheuselias12/ProvaEclipseworks/assets/47905883/c94ef794-b752-4ece-9ad2-addd7a35c4ce)
+
 ![image](https://github.com/matheuselias12/ProvaEclipseworks/assets/47905883/48e8c874-7467-493c-bb04-f528cb70d0c8)
 
 - Apos fazer o clone do projeto em uma pasta favor executar a solução:
-  ![image](https://github.com/matheuselias12/ProvaEclipseworks/assets/47905883/63c19ca1-3ede-439d-9a66-65e1a3106cec)
+
+![image](https://github.com/matheuselias12/ProvaEclipseworks/assets/47905883/f18a6dca-a265-4bcb-8d12-79c31ac0370c)
+
+- Para executar o projeto colocar no docker-compose e de o play no projeto.
+
+![image](https://github.com/matheuselias12/ProvaEclipseworks/assets/47905883/a434c2b5-1bb2-42cb-bb65-312060f3bb87)
+
+![image](https://github.com/matheuselias12/ProvaEclipseworks/assets/47905883/b7d117e7-a1ed-47a7-ae55-edb5cb35b4ec)
+
+- Assim foi criado a imagem da API e do Banco de Dados:
+
+![image](https://github.com/matheuselias12/ProvaEclipseworks/assets/47905883/4d1d9c07-28ed-4e8d-8d20-fcba537c3dea)
+
+- Para conectar no banco de dados SQL serve localmente segue passo a passo:
+
+1º Nome do servidor: localhost, 1450
+2º Logon: SA
+3º Senha: Eclipse123@
+
+![image](https://github.com/matheuselias12/ProvaEclipseworks/assets/47905883/afa84ff9-be40-4061-9c7f-277d608340e1)
+![image](https://github.com/matheuselias12/ProvaEclipseworks/assets/47905883/5850d13b-fc04-41ea-aae1-2b38b61ce157)
+
+
+
+
 
 
 
